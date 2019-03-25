@@ -15,6 +15,10 @@ public:
 	~Form1();
 
 private:
+	void initAcquireButton();
+	void initStopButton();
+	void initBwCheckbox();
+	void initCloseButton();
 	Ui::Form1 *ui;
 };
 
