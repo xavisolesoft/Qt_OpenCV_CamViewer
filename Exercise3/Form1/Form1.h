@@ -1,8 +1,12 @@
 #pragma once
 
-#include <QMainWindow>
+#include "FrameGrabber.h"
 
-class FrameGLWidget;
+#include <QMainWindow>
+#include <QTimer>
+#include <QQueue>
+#include <QPixmap>
+#include <QMutex>
 
 namespace Ui {
 class Form1;
@@ -21,7 +25,16 @@ private:
 	void initStopButton();
 	void initBwCheckbox();
 	void initCloseButton();
+
+	void initVideoV1();
+	void initVideoV2();
+	void startVideo();
+	void stopVideo();
+
+	FrameGrabber frameGrabber;
+	QTimer camTimer;
+	QQueue<QPixmap> videoQueue;
+	QMutex mutex;
 	Ui::Form1* ui;
-	FrameGLWidget* glWidget = nullptr;
 };
 

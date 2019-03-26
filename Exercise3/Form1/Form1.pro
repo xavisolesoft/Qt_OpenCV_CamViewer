@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui opengl widgets
+QT       += core gui widgets concurrent
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -30,13 +30,11 @@ Debug:LIBS += -L$$OPENCV_PATH/build/x64/vc15/lib -lopencv_world401d
 SOURCES += \
         main.cpp \
         Form1.cpp \
-    FrameGrabber.cpp \
-    FrameGLWidget.cpp
+    FrameGrabber.cpp
 
 HEADERS += \
         Form1.h \
-    FrameGrabber.h \
-    FrameGLWidget.h
+    FrameGrabber.h
 
 FORMS += \
         Form1.ui
