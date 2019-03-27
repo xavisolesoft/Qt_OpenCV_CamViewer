@@ -44,7 +44,7 @@ void VideoControllerExercise4::startVideo()
 	videoFinished = false;
 	QtConcurrent::run([this](){
 		QTime prevTime = QTime::currentTime();
-		while(!videoFinished){
+		while(!videoFinished && frameGrabber){
 			QTime currentTime = QTime::currentTime();
 			if(prevTime.msecsTo(currentTime) >= 40){
 				cv::Mat frame = frameGrabber->queryNewFrame();
@@ -55,7 +55,7 @@ void VideoControllerExercise4::startVideo()
 				}else{
 					modifier = new StrategyModify();
 				}
-				frame = modifier->modify(frame);
+				modifier->modify(frame);
 
 				QImage image(frame.data, frame.cols, frame.rows, frame.step, QImage::Format_RGB888);
 				mutex.lock();

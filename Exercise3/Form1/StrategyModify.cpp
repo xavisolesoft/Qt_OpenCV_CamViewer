@@ -5,7 +5,7 @@ StrategyModify::StrategyModify()
 
 }
 
-cv::Mat StrategyModify::modify(const cv::Mat& mat) const
+void StrategyModify::modify(cv::Mat&) const
 {
-	return mat;
+
 }

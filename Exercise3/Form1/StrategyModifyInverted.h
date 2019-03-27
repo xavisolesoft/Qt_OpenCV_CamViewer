@@ -8,5 +8,5 @@ class StrategyModifyInverted :
 public:
 	StrategyModifyInverted();
 
-	cv::Mat modify(const cv::Mat &mat) const override;
+	void modify(cv::Mat& mat) const override;
 };

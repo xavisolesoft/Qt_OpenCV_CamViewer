@@ -7,5 +7,5 @@ class StrategyModify
 public:
 	StrategyModify();
 
-	virtual cv::Mat modify(const cv::Mat& mat) const;
+	virtual void modify(cv::Mat& mat) const const;
 };

@@ -8,5 +8,5 @@ class StrategyModifyWB :
 public:
 	StrategyModifyWB();
 
-	cv::Mat modify(const cv::Mat &mat) const override;
+	void modify(cv::Mat& mat) const override;
 };

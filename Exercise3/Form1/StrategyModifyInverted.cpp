@@ -5,7 +5,7 @@ StrategyModifyInverted::StrategyModifyInverted()
 
 }
 
-cv::Mat StrategyModifyInverted::modify(const cv::Mat& mat) const
+void StrategyModifyInverted::modify(cv::Mat& mat) const
 {
-	return cv::Scalar::all(255) - mat;
+	cv::flip(mat, mat, 0);
 }
