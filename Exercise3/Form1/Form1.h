@@ -1,12 +1,9 @@
 #pragma once
 
-#include "FrameGrabber.h"
+#include "VideoControllerExercise3.h"
+#include "VideoControllerExercise4.h"
 
 #include <QMainWindow>
-#include <QTimer>
-#include <QQueue>
-#include <QPixmap>
-#include <QMutex>
 
 namespace Ui {
 class Form1;
@@ -20,21 +17,18 @@ public:
 	explicit Form1(QWidget *parent = 0);
 	~Form1();
 
+private slots:
+	void showNewFrame(const QPixmap& pixmap);
+
 private:
 	void initAcquireButton();
 	void initStopButton();
 	void initBwCheckbox();
 	void initCloseButton();
+	void initVideoController();
 
-	void initVideoV1();
-	void initVideoV2();
-	void startVideo();
-	void stopVideo();
-
-	FrameGrabber frameGrabber;
-	QTimer camTimer;
-	QQueue<QPixmap> videoQueue;
-	QMutex mutex;
+	//VideoControllerExercise3 videoController;
+	VideoControllerExercise4 videoController;
 	Ui::Form1* ui;
 };
 

@@ -30,11 +30,21 @@ Debug:LIBS += -L$$OPENCV_PATH/build/x64/vc15/lib -lopencv_world401d
 SOURCES += \
         main.cpp \
         Form1.cpp \
-    FrameGrabber.cpp
+    FrameGrabber.cpp \
+    StrategyModify.cpp \
+    StrategyModifyWB.cpp \
+    StrategyModifyInverted.cpp \
+    VideoControllerExercise3.cpp \
+    VideoControllerExercise4.cpp
 
 HEADERS += \
         Form1.h \
-    FrameGrabber.h
+    FrameGrabber.h \
+    StrategyModify.h \
+    StrategyModifyWB.h \
+    StrategyModifyInverted.h \
+    VideoControllerExercise3.h \
+    VideoControllerExercise4.h
 
 FORMS += \
         Form1.ui

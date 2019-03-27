@@ -2,10 +2,7 @@
 #include "ui_Form1.h"
 
 #include <QImage>
-#include <QTime>
-#include <QTimer>
 #include <QVBoxLayout>
-#include <QtConcurrent>
 
 Form1::Form1(QWidget *parent) :
 	QMainWindow(parent),
@@ -17,12 +14,17 @@ Form1::Form1(QWidget *parent) :
 	initStopButton();
 	initBwCheckbox();
 	initCloseButton();
-	initVideoV2();
+	initVideoController();
 }
 
 Form1::~Form1()
 {
 	delete ui;
+}
+
+void Form1::showNewFrame(const QPixmap& pixmap)
+{
+	ui->imageLabel->setPixmap(pixmap);
 }
 
 void Form1::initAcquireButton()
@@ -34,7 +36,7 @@ void Form1::initAcquireButton()
 				ui->stopButton->setEnabled(true);
 				ui->bwCheckBox->setEnabled(true);
 				ui->textEdit->setText(tr("The Acquiring..."));
-				startVideo();
+				videoController.startVideo();
 	});
 }
 
@@ -49,7 +51,8 @@ void Form1::initStopButton()
 				ui->stopButton->setEnabled(false);
 				ui->bwCheckBox->setEnabled(false);
 				ui->textEdit->setText("");
-				stopVideo();
+				videoController.stopVideo();
+				showNewFrame(QPixmap());
 	});
 }
 
@@ -68,64 +71,17 @@ void Form1::initCloseButton()
 	});
 }
 
-void Form1::initVideoV1()
+void Form1::initVideoController()
 {
-	connect(&camTimer,
-			&QTimer::timeout,
-			[this](){
-				cv::Mat frame = frameGrabber.queryNewFrame();
-				QImage image(frame.data, frame.cols, frame.rows, frame.step, QImage::Format_RGB888);
-				ui->imageLabel->setPixmap(QPixmap::fromImage(image));
+	videoController.init();
+	videoController.setBwEnabled(ui->bwCheckBox->isChecked());
+	connect(&videoController,
+			SIGNAL(showNewFrame(const QPixmap&)),
+			SLOT(showNewFrame(const QPixmap&)));
+
+	connect(ui->bwCheckBox,
+			&QCheckBox::toggled,
+			[this](bool checked){
+				videoController.setBwEnabled(checked);
 			});
-
-	camTimer.setInterval(40);
-}
-
-void Form1::initVideoV2()
-{
-	connect(&camTimer,
-			&QTimer::timeout,
-			[this](){
-				bool emptyQueue = false;
-				do{
-					QPixmap image;
-					mutex.lock();
-					if(!videoQueue.isEmpty()){
-						image = videoQueue.dequeue();
-					}else{
-						emptyQueue = true;
-					}
-					mutex.unlock();
-					if(!image.isNull()){
-						ui->imageLabel->setPixmap(image);
-					}
-				}while(!emptyQueue);
-			});
-
-	QtConcurrent::run([this](){
-		QTime prevTime = QTime::currentTime();
-		forever{
-			QTime currentTime = QTime::currentTime();
-			if(prevTime.msecsTo(currentTime) >= 40){
-				cv::Mat frame = frameGrabber.queryNewFrame();
-				QImage image(frame.data, frame.cols, frame.rows, frame.step, QImage::Format_RGB888);
-				//ui->imageLabel->setPixmap(QPixmap::fromImage(image));
-				mutex.lock();
-				videoQueue.enqueue(QPixmap::fromImage(image));
-				mutex.unlock();
-			}
-		}
-	});
-
-	camTimer.setInterval(20);
-}
-
-void Form1::startVideo()
-{
-	camTimer.start(40);
-}
-
-void Form1::stopVideo()
-{
-	camTimer.stop();
 }
