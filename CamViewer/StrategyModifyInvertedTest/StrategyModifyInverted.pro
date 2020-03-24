@@ -7,14 +7,14 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES +=  tst_strategymodifyinvertedtest.cpp \
-    ../Form1/StrategyModify.cpp \
-    ../Form1/StrategyModifyInverted.cpp
+    ../Application/StrategyModify.cpp \
+   ../Application/StrategyModifyInverted.cpp
 
 HEADERS += ../Form1/StrategyModify.h \
-    ../Form1/StrategyModifyInverted.h
+   StrategyModifyInverted.h
 
 
 OPENCV_PATH = ../../opencv
-INCLUDEPATH += $$OPENCV_PATH/build/include
+INCLUDEPATH += $$OPENCV_PATH/build/include ../Application
 Release:LIBS += -L$$OPENCV_PATH/build/x64/vc15/lib -lopencv_world401
 Debug:LIBS += -L$$OPENCV_PATH/build/x64/vc15/lib -lopencv_world401d

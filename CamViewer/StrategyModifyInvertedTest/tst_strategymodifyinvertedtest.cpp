@@ -1,6 +1,6 @@
 #include <QtTest>
 
-#include "../Form1/StrategyModifyInverted.h"
+#include "StrategyModifyInverted.h"
 
 
 class StrategyModifyInvertedTest : public QObject
