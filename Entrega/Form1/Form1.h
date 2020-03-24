@@ -1,7 +1,6 @@
 #pragma once
 
-#include "VideoControllerExercise3.h"
-#include "VideoControllerExercise4.h"
+#include "VideoController.h"
 
 #include <QMainWindow>
 
