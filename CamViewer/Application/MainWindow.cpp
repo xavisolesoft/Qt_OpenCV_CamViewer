@@ -1,5 +1,5 @@
-#include "Form1.h"
-#include "ui_Form1.h"
+#include "MainWindow.h"
+#include "ui_MainWindow.h"
 
 #include <QImage>
 #include <QVBoxLayout>

@@ -28,21 +28,21 @@ Release:LIBS += -L$$OPENCV_PATH/build/x64/vc15/lib -lopencv_world401
 Debug:LIBS += -L$$OPENCV_PATH/build/x64/vc15/lib -lopencv_world401d
 
 SOURCES += \
+    MainWindow.cpp \
     VideoController.cpp \
         main.cpp \
-        Form1.cpp \
     FrameGrabber.cpp \
     StrategyModify.cpp \
     StrategyModifyWB.cpp \
     StrategyModifyInverted.cpp
 
 HEADERS += \
-        Form1.h \
     FrameGrabber.h \
+    MainWindow.h \
     StrategyModify.h \
     StrategyModifyWB.h \
     StrategyModifyInverted.h \
     VideoController.h
 
 FORMS += \
-        Form1.ui
+    MainWindow.ui
