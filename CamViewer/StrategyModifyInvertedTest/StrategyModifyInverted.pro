@@ -10,7 +10,7 @@ SOURCES +=  tst_strategymodifyinvertedtest.cpp \
     ../Application/StrategyModify.cpp \
    ../Application/StrategyModifyInverted.cpp
 
-HEADERS += ../Form1/StrategyModify.h \
+HEADERS += StrategyModify.h \
    StrategyModifyInverted.h
 
 

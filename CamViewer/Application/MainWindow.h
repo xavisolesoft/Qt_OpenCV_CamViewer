@@ -5,16 +5,16 @@
 #include <QMainWindow>
 
 namespace Ui {
-class Form1;
+class MainWindow;
 }
 
-class Form1 : public QMainWindow
+class MainWindow : public QMainWindow
 {
 	Q_OBJECT
 
 public:
-	explicit Form1(QWidget *parent = 0);
-	~Form1();
+	explicit MainWindow(QWidget *parent = nullptr);
+	~MainWindow();
 
 private slots:
 	void showNewFrame(const QPixmap& pixmap);
@@ -26,8 +26,7 @@ private:
 	void initCloseButton();
 	void initVideoController();
 
-	//VideoControllerExercise3 videoController;
 	VideoControllerExercise4 videoController;
-	Ui::Form1* ui;
+	Ui::MainWindow* ui;
 };
 

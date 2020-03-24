@@ -4,9 +4,9 @@
 #include <QImage>
 #include <QVBoxLayout>
 
-Form1::Form1(QWidget *parent) :
+MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
-	ui(new Ui::Form1)
+    ui(new Ui::MainWindow)
 {
 	ui->setupUi(this);
 
@@ -17,17 +17,17 @@ Form1::Form1(QWidget *parent) :
 	initVideoController();
 }
 
-Form1::~Form1()
+MainWindow::~MainWindow()
 {
 	delete ui;
 }
 
-void Form1::showNewFrame(const QPixmap& pixmap)
+void MainWindow::showNewFrame(const QPixmap& pixmap)
 {
 	ui->imageLabel->setPixmap(pixmap);
 }
 
-void Form1::initAcquireButton()
+void MainWindow::initAcquireButton()
 {
 	connect(ui->acquireButton,
 			&QAbstractButton::clicked,
@@ -40,7 +40,7 @@ void Form1::initAcquireButton()
 	});
 }
 
-void Form1::initStopButton()
+void MainWindow::initStopButton()
 {
 	ui->stopButton->setEnabled(false);
 
@@ -56,13 +56,13 @@ void Form1::initStopButton()
 	});
 }
 
-void Form1::initBwCheckbox()
+void MainWindow::initBwCheckbox()
 {
 	ui->bwCheckBox->setChecked(true);
 	ui->bwCheckBox->setEnabled(false);
 }
 
-void Form1::initCloseButton()
+void MainWindow::initCloseButton()
 {
 	connect(ui->closeButton,
 			&QAbstractButton::clicked,
@@ -71,7 +71,7 @@ void Form1::initCloseButton()
 	});
 }
 
-void Form1::initVideoController()
+void MainWindow::initVideoController()
 {
 	videoController.init();
 	videoController.setBwEnabled(ui->bwCheckBox->isChecked());
