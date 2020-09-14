@@ -46,3 +46,13 @@ HEADERS += \
 
 FORMS += \
     MainWindow.ui
+
+CONFIG( debug, debug|release ) {
+    BUILD_MODE = debug
+} else {
+    BUILD_MODE = release
+}
+#message($${OUT_PWD}/$${BUILD_MODE}/$${TARGET}.exe)
+TARGET_PATH = $${OUT_PWD}/$$BUILD_MODE/$${TARGET}.exe
+message($$shell_quote($$shell_path($$TARGET_PATH)))
+windeployqt $$TARGET_PATH
